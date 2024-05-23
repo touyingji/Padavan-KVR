@@ -14,7 +14,7 @@ download_test:
 extract_test:
 	( if [ ! -d $(SRC_NAME) ]; then \
 		tar xf $(SRC_NAME).tar.xz; \
-		patch -d $(SRC_NAME) -p1 -i ../no_docs_test.patch; \
+	#	patch -d $(SRC_NAME) -p1 -i ../no_docs_test.patch; \
 	fi )
 
 config_test:
@@ -50,12 +50,15 @@ configure:
 		--disable-tls-srp \
 		--disable-libcurl-option \
 		--disable-threaded-resolver \
+		--disable-docs \
 		--without-gnutls \
-		--without-ca-bundle \
 		--without-libidn \
 		--without-libssh2 \
+		--without-libpsl \
 		--without-krb4 \
 		--without-nss \
+		--without-ca-path \
+		--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
 		--with-random=/dev/urandom \
 		--with-zlib=$(STAGEDIR) \
 		--with-ssl=$(STAGEDIR) \
